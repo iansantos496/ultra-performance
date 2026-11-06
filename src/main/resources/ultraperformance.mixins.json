@@ -1,0 +1,27 @@
+{
+	"required": false,
+	"minVersion": "0.8",
+	"package": "com.ultraperformance.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"MobEntityMixin",
+		"MinecraftServerMixin"
+	],
+	"client": [
+		"client.MinecraftClientMixin",
+		"client.EntityRenderDispatcherMixin",
+		"client.BlockEntityRenderDispatcherMixin",
+		"client.ParticleManagerMixin",
+		"client.WorldRendererMixin",
+		"client.SpriteAtlasTextureMixin",
+		"client.ChunkBuilderMixin",
+		"client.ClientPlayNetworkHandlerMixin",
+		"client.OptionsScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

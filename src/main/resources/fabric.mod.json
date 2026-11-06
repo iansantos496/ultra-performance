@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "ultraperformance",
+	"version": "${version}",
+	"name": "Ultra Performance",
+	"description": "Mod de otimização para Minecraft 1.16.5 (Fabric) pensado para computadores fracos: culling de entidades e blocos animados, limite de partículas, texturas animadas e upload de chunks controlados, IA de mobs distantes reduzida, perfis de desempenho, ajuste adaptativo, overlay e benchmark A/B.",
+	"authors": [
+		"Projeto Ultra Performance"
+	],
+	"license": "MIT",
+	"icon": "assets/ultraperformance/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.ultraperformance.UltraPerformance"
+		],
+		"client": [
+			"com.ultraperformance.client.UltraPerformanceClient"
+		]
+	},
+	"mixins": [
+		"ultraperformance.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.11.0",
+		"minecraft": "~1.16.5",
+		"java": ">=8",
+		"fabric": "*"
+	}
+}

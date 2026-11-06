@@ -1,0 +1,55 @@
+plugins {
+	// Mesmo plugin e versão que o modelo oficial da Fabric usa hoje para o Minecraft 1.16.5.
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+}
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	// O Loom já adiciona os repositórios do Minecraft e da Fabric automaticamente.
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+	// Yarn 1.16.5+build.10: todos os nomes de classes, métodos e campos usados neste
+	// projeto foram conferidos contra esses mapeamentos (ver PROGRESSO.md).
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+	def modVersion = project.version
+	inputs.property "version", modVersion
+
+	filesMatching("fabric.mod.json") {
+		expand "version": modVersion
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	// O Minecraft 1.16.5 roda em Java 8: o código é compilado para esse nível.
+	it.options.release = 8
+	it.options.encoding = "UTF-8"
+}
+
+java {
+	// Gera também o -sources.jar (o .jar para instalar é o que NÃO termina em -sources).
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
+	from("LICENSE") {
+		rename { "${it}_${projectName}" }
+	}
+}
